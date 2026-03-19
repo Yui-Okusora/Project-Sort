@@ -24,7 +24,7 @@ int binarySearch(int a[], int item, int low, int high, int& compare)
     return binarySearch(a, item, low, mid - 1, compare);
 }
 
-void binaryInsertionSort(int a[], int n)
+pair<int, double> binaryInsertionSort(int a[], int n)
 {
     auto start = chrono::high_resolution_clock::now();
     int i, locate, j, selected;
@@ -47,6 +47,5 @@ void binaryInsertionSort(int a[], int n)
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
 
-    if (flag & 1) std::cout << "Running time (if required): " << duration.count() << " ms\n";
-    if (flag & 2) std::cout << "Comparisions (if required): " << compare << "\n";
+    return { compare, duration.count() };
 }

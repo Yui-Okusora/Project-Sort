@@ -67,7 +67,7 @@ void mergeSortRecursive(int a[], int left, int right, int& compare)
     merge(a, left, mid, right, compare);
 }
 
-void mergeSort(int a[], int n)
+pair<int, double> mergeSort(int a[], int n)
 {
     auto start = chrono::high_resolution_clock::now();
     int compare = 0;
@@ -77,6 +77,5 @@ void mergeSort(int a[], int n)
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
 
-    if (flag & 1) std::cout << "Running time (if required): " << duration.count() << " ms\n";
-    if (flag & 2) std::cout << "Comparisions (if required): " << compare << "\n";
+    return { compare, duration.count() };
 }

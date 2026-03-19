@@ -3,7 +3,6 @@
 #include <chrono>
 #include <random>
 
-// Flash Sort algorithm with comparison tracking
 void flashSort(std::vector<int> &a, unsigned long long &compCount)
 {
     int n = a.size();
@@ -14,16 +13,15 @@ void flashSort(std::vector<int> &a, unsigned long long &compCount)
     int max_idx = 0;
     int min_val = a[0];
 
-    // Phase 1: Classification
     for (int i = 1; i < n; ++i)
     {
-        compCount++; // Counting min comparison
+        compCount++; 
         if (a[i] < min_val)
         {
             min_val = a[i];
         }
 
-        compCount++; // Counting max comparison
+        compCount++; 
         if (a[i] > a[max_idx])
         {
             max_idx = i;
@@ -31,21 +29,18 @@ void flashSort(std::vector<int> &a, unsigned long long &compCount)
     }
 
     if (a[max_idx] == min_val)
-        return; // All elements are the same
+        return; 
 
-    // Number of classes (heuristically set to 0.45 * n)
     int m = 0.45 * n;
     std::vector<int> l(m, 0);
     double c1 = (double)(m - 1) / (a[max_idx] - min_val);
 
-    // Count elements in each class
     for (int i = 0; i < n; ++i)
     {
         int k = c1 * (a[i] - min_val);
         l[k]++;
     }
 
-    // Calculate starting positions of classes
     for (int i = 1; i < m; ++i)
     {
         l[i] += l[i - 1];
@@ -53,7 +48,6 @@ void flashSort(std::vector<int> &a, unsigned long long &compCount)
 
     std::swap(a[max_idx], a[0]);
 
-    // Phase 2: Permutation
     int nmove = 0;
     int j = 0;
     int k = m - 1;
@@ -78,42 +72,34 @@ void flashSort(std::vector<int> &a, unsigned long long &compCount)
         }
     }
 
-    // Phase 3: Straight Insertion Sort
     for (int i = 1; i < n; ++i)
     {
         int hold = a[i];
         int j = i - 1;
 
         if (j >= 0)
-            compCount++; // Initial comparison for the while loop
+            compCount++; 
         while (j >= 0 && a[j] > hold)
         {
             a[j + 1] = a[j];
             j--;
             if (j >= 0)
-                compCount++; // Subsequent comparisons in the while loop
+                compCount++; 
         }
         a[j + 1] = hold;
     }
 }
 
-// Orchestrator function to handle setup, execution, and the exact requested output
-void runFlashSort(std::vector<int> data)
+pair<int, double> runFlashSort(std::vector<int> data)
 {
     unsigned long long comparisons = 0;
 
-    // Start timer
     auto start = std::chrono::high_resolution_clock::now();
 
-    // Run sort
     flashSort(data, comparisons);
 
-    // Stop timer
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> duration_ms = end - start;
 
-    // Output formatted exactly like the provided image example
-    // (Note: Kept the exact spelling "Comparisions" from your image)
-    if (flag & 1) std::cout << "Running time (if required): " << duration_ms.count() << " ms\n";
-    if (flag & 2) std::cout << "Comparisions (if required): " << comparisons << "\n";
+    return { comparisons, duration_ms.count() };
 }

@@ -3,7 +3,7 @@
 #include <vector> 
 using namespace std;
 
-void countingSort(int a[], int n){
+pair<int, double> countingSort(int a[], int n){
     auto start = chrono::high_resolution_clock::now();
     int compare = 0;
 
@@ -39,6 +39,5 @@ void countingSort(int a[], int n){
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
 
-    if (flag & 1) std::cout << "Running time (if required): " << duration.count() << " ms\n";
-    if (flag & 2) std::cout << "Comparisions (if required): " << compare << "\n";
+    return { compare, duration.count() };
 }

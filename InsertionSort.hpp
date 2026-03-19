@@ -2,7 +2,7 @@
 #include <chrono>
 #include <vector>
 
-void InsertionSort(int a[], int n)
+pair<int, double> InsertionSort(int a[], int n)
 {
     int compare = 0;
 
@@ -34,6 +34,5 @@ void InsertionSort(int a[], int n)
     std::chrono::milliseconds duration =
         std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-    if (flag & 1) std::cout << "Running time (if required): " << duration.count() << " ms\n";
-    if (flag & 2) std::cout << "Comparisions (if required): " << compare << "\n";
+    return { compare, duration.count() };
 }

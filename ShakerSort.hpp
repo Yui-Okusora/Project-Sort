@@ -2,7 +2,7 @@
 #include <chrono>
 #include <vector>
 
-void ShakerSort(int a[], int n)
+pair<int, double> ShakerSort(int a[], int n)
 {
     int compare = 0;
     auto start = std::chrono::high_resolution_clock::now();
@@ -35,6 +35,5 @@ void ShakerSort(int a[], int n)
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    if (flag & 1) std::cout << "Running time (if required): " << duration.count() << " ms\n";
-    if (flag & 2) std::cout << "Comparisions (if required): " << compare << "\n";
+    return { compare, duration.count() };
 }
