@@ -2,38 +2,51 @@
 #include <chrono>
 #include <vector>
 
-std::pair<long long, double> ShakerSort(int a[], int n)
+std::pair<long long, double> ShakerSort(int arr[], int n) 
 {
     int compare = 0;
-    auto start = std::chrono::high_resolution_clock::now();
-    int Left = 0;
-    int Right = n - 1;
-    int k = 0;
-    int i;
-    while (Left < Right)
+    auto startTime = std::chrono::high_resolution_clock::now();
+    bool is_swapped = true;
+    int start = 0;
+    int end = n - 1;
+
+    while (is_swapped) 
     {
-        for (i = Left; i < Right; i++)
+        compare++;
+        is_swapped = false;
+
+        for (int i = start; i < end; ++i) 
         {
-            compare++;
-            if (a[i] > a[i + 1])
+            compare += 2;
+            if (arr[i] > arr[i + 1]) 
             {
-                std::swap(a[i], a[i + 1]);
-                k = i;
+                std::swap(arr[i], arr[i + 1]);
+                is_swapped = true;
             }
         }
-        Right = k;
-        for (i = Right; i > Left; i--)
+        compare += 2;
+        if (!is_swapped) 
         {
-            compare++;
-            if (a[i] < a[i - 1])
+            break;
+        }
+
+        is_swapped = false;
+        --end;
+
+        for (int i = end - 1; i >= start; --i) 
+        {
+            compare+=2;
+            if (arr[i] > arr[i + 1]) 
             {
-                std::swap(a[i], a[i - 1]);
-                k = i;
+                std::swap(arr[i], arr[i + 1]);
+                is_swapped = true;
             }
         }
-        Left = k;
+        compare++;
+        ++start;
     }
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    compare++;
+    auto endTime = std::chrono::high_resolution_clock::now();
+    std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
     return { compare, duration.count() };
 }
