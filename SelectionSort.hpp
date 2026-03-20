@@ -3,13 +3,14 @@
 #include <chrono>
 #include <random>
 
-void selectionSort(std::vector<int> &a, unsigned long long &compCount)
+void selectionSort(std::vector<int> &a, double &compCount)
 {
     int n = a.size();
     compCount = 0;
 
     for (int i = 0; i < n - 1; ++i)
     {
+        compCount++;
         int min_idx = i;
 
         for (int j = i + 1; j < n; ++j)
@@ -19,7 +20,9 @@ void selectionSort(std::vector<int> &a, unsigned long long &compCount)
             {
                 min_idx = j;
             }
+            compCount++;
         }
+        compCount++;
         if (min_idx != i)
         {
             std::swap(a[i], a[min_idx]);
@@ -27,9 +30,9 @@ void selectionSort(std::vector<int> &a, unsigned long long &compCount)
     }
 }
 
-std::pair<long long, double> runSelectionSort(std::vector<int> data)
+std::pair<double, double> runSelectionSort(std::vector<int> data)
 {
-    unsigned long long comparisons = 0;
+    double comparisons = 0;
 
     auto start = std::chrono::high_resolution_clock::now();
 
