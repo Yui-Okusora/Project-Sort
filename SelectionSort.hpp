@@ -10,6 +10,7 @@ void selectionSort(std::vector<int> &a, double &compCount)
 
     for (int i = 0; i < n - 1; ++i)
     {
+        compCount++;
         int min_idx = i;
 
         for (int j = i + 1; j < n; ++j)
@@ -19,7 +20,9 @@ void selectionSort(std::vector<int> &a, double &compCount)
             {
                 min_idx = j;
             }
+            compCount++;
         }
+        compCount++;
         if (min_idx != i)
         {
             std::swap(a[i], a[min_idx]);

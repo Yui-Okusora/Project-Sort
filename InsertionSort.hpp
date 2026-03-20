@@ -4,7 +4,7 @@
 
 std::pair<double, double> InsertionSort(int a[], int n)
 {
-    int compare = 0;
+    double compare = 0;
 
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -20,6 +20,7 @@ std::pair<double, double> InsertionSort(int a[], int n)
 
             if (a[j] > key)
             {
+                compare++;
                 a[j + 1] = a[j];
                 j--;
             }

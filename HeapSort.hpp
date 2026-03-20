@@ -9,6 +9,7 @@ void heapify(std::vector<int> &a, int n, int i, double &compCount)
     int left = 2 * i + 1;
     int right = 2 * i + 2;
 
+    compCount++;
     if (left < n)
     {
         compCount++; 
@@ -18,6 +19,7 @@ void heapify(std::vector<int> &a, int n, int i, double &compCount)
         }
     }
 
+    compCount++;
     if (right < n)
     {
         compCount++; 
@@ -26,6 +28,7 @@ void heapify(std::vector<int> &a, int n, int i, double &compCount)
             largest = right;
         }
     }
+    compCount++;
     if (largest != i)
     {
         std::swap(a[i], a[largest]);
@@ -41,11 +44,13 @@ void heapSort(std::vector<int> &a, double &compCount)
 
     for (int i = n / 2 - 1; i >= 0; i--)
     {
+        compCount++;
         heapify(a, n, i, compCount);
     }
 
     for (int i = n - 1; i > 0; i--)
     {
+        compCount++;
         std::swap(a[0], a[i]);
         heapify(a, i, 0, compCount);
     }
