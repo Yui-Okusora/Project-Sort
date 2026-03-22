@@ -12,3 +12,6 @@ add_executable(ProjectSort "Project-Sort.cpp")
 
 target_compile_features(ProjectSort PUBLIC cxx_std_17)
 
+if(MSVC)
+    target_link_options(ProjectSort PRIVATE "/STACK:32000000")
+endif()
