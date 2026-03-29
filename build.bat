@@ -1,7 +1,7 @@
 @echo off
 SETLOCAL
 SET BUILD_DIR=build
-SET EXE_NAME=ProjectSort.exe
+SET EXE_NAME=01.exe
 SET STACK_SIZE=32000000
 
 echo [INFO] Starting build process for Project-Sort...
